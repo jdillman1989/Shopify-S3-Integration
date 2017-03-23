@@ -1,0 +1,15 @@
+.s3-orders{
+	width: 100%;
+	border-collapse: collapse;
+	vertical-align: top;
+}
+
+.s3-orders tr:nth-of-type(odd){
+	background: #eee;
+}
+
+.s3-orders td{
+	padding: 6px;
+	border: 1px solid #ccc;
+	text-align: left;
+}

@@ -1,0 +1,40 @@
+<!-- Add this code to the order status page scripts -->
+{% if first_time_accessed %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+
+	for (var i = 0; i < Shopify.checkout.line_items.length; i++) {
+
+		if ( Shopify.checkout.line_items[i].properties.image.length > 7 ) {
+
+			var fileURL = Shopify.checkout.line_items[i].properties.image;
+			var fileFormat = fileURL.split(".");
+			var format = fileFormat[fileFormat.length - 1];
+			var orderID = '';
+			if (Shopify.checkout.order_id != null) {
+				orderID = Shopify.checkout.order_id;
+			} 
+			else{
+				var orderString = $('.os-order-number').text();
+				var orderStringArray = orderString.split("#");
+				orderID = orderStringArray[1];
+			};
+			var lineItem = Shopify.checkout.line_items[i].id;
+			var storeURL = Shopify.Checkout.apiHost;
+			var storeString = storeURL.split(".");
+			var store = storeString[0];
+			var data = JSON.stringify({ "image": { "data": fileURL, "format": format }, "order": { "order_id": orderID, "line_item": lineItem, "store": store } });
+			$.ajax({
+				type: 'GET',
+				dataType : 'json',
+				async: false,
+				url: 'https://shopify.thinksolid.com/s3-app/upload_order_image.php',
+				data: {data}
+			});
+		}
+	};
+
+});
+</script>
+{% endif %}
