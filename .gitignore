@@ -1,0 +1,17 @@
+.idea/
+.DS_Store
+node_modules/
+.vagrant
+/commerce/vendor/
+/commerce/pub/static/
+/commerce/var/view_preprocessed/
+*.log
+/ansible/site.retry
+/db/
+/app/http/public/css
+/bin/product-data/magento/*.csv
+/bin/product-data/xcart/*.csv
+/bin/product-data/vendor
+/bin/vendor/
+metafields-app-config/
+s3-app-config/
